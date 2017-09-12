@@ -6,7 +6,7 @@ Classic k-means using euclidean distance in C++
 > make
 
 ## Usage
-> ./kmeans.out <K> <INPUT> <OUTPUT> <BR/>
+> ./kmeans.out \<K\> \<INPUT\> \<OUTPUT\> <BR/>
 
 - K => Number of clusters
 - INPUT => File path of input collection

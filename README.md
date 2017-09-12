@@ -2,6 +2,7 @@
 Classic k-means using euclidean distance in C++
 
 ## Installation
+- Cmake (3.5 or >)
 > cmake . <BR/>
 > make
 

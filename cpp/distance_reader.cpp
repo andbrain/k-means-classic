@@ -2,24 +2,45 @@
 
 distance_reader::distance_reader(string path)
 {
-	cout << "Starting distance_reader" << endl;
+	// cout << "Starting distance_reader" << endl;
 	mInputPath = path;
-	vector<pair<double,double>* >* mDist = new vector<pair<double,double>* >();
+	mDist = new vector<par*>();
 }
 
 distance_reader::~distance_reader()
 {
-	// TODO:: delete all pairs of vector mDist
-	cout << "Finishing distance_reader" << endl;
+	for (std::vector<par*>::iterator i = mDist->begin(); i != mDist->end(); ++i)
+		delete (*i);
+	// cout << "Finishing distance_reader" << endl;
 }
 
 int distance_reader::process()
 {
+	FILE *pFile;
 
-	return 0;
+	try{
+		pFile = fopen(mInputPath.c_str(), "r");
+		float n1,n2;
+
+		while(fscanf(pFile, "%f %f", &n1, &n2) != EOF)
+		{
+			par *ponto = new par();
+			ponto->x = n1;
+			ponto->y = n2;
+			mDist->push_back(ponto);
+		}
+		fclose(pFile);
+	}
+	catch(exception& e)
+	{
+		cout << "[ERROR] exception: " << e.what() << endl;
+		return 0;
+	}
+
+	return 1;
 }
 
-vector<pair<double,double>* >* distance_reader::getDistances()
+vector<par*>* distance_reader::getDistances()
 {
 	return mDist;
 }

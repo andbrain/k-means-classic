@@ -9,7 +9,6 @@ using namespace std;
 
 int k, type;
 string *inputPath, *outputPath;
-
 void checkInputParameters(int argc, char const *argv[]);
 
 int main(int argc, char const *argv[])
@@ -20,9 +19,17 @@ int main(int argc, char const *argv[])
 	{
 		//kmeans based on euclidean distance
 		distance_reader *dr = new distance_reader(*inputPath);
-		dr->process();
-		vector< pair<double,double>* > *distances = dr->getDistances();
-		// TODO:: kmeans classic
+		if(!dr->process()){
+			delete dr;
+			delete inputPath;
+			delete outputPath;
+			exit(1);
+		}
+
+		//classic kmeans
+		vector<par*> *dist = dr->getDistances();
+
+
 
 		delete dr;
 	}

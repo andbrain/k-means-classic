@@ -1,15 +1,11 @@
 #ifndef DISTANCE_READER_H
+#define DISTANCE_READER_H
 #include <iostream>
 #include <vector>
 #include <cstdio>
+#include "util.h"
 
 using namespace std;
-
-struct par
-{
-	double x;
-	double y;
-};
 
 class distance_reader
 {

@@ -27,10 +27,9 @@ int main(int argc, char const *argv[])
 		}
 
 		//classic kmeans
-		vector<par*> *dist = dr->getDistances();
+		kmeans_d *kd = new kmeans_d(k,dr->getDistances());
 
-
-
+		delete kd;
 		delete dr;
 	}
 	else

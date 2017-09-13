@@ -1,4 +1,5 @@
 #ifndef KMEANS_S_H
+#define KMEANS_S_H
 #include <iostream>
 
 using namespace std;

@@ -28,7 +28,8 @@ int main(int argc, char const *argv[])
 
 		//classic kmeans
 		kmeans_d *kd = new kmeans_d(k,dr->getDistances());
-
+		kd->process();
+		
 		delete kd;
 		delete dr;
 	}

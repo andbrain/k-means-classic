@@ -19,6 +19,7 @@ private:
 	int mK;
 	map<int,par*> *mPoints;
 	vector<par*> mCenters;
+	map<int,vector<par*>*> *mClusters;
 	void initialize(vector<par*>* v);
 };
 

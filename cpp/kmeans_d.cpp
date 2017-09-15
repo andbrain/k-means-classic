@@ -29,7 +29,7 @@ void kmeans_d::initialize(vector<par*>* v)
 {
 	//get all points from vector{par} to map{id|par}
 	for (int i=0; i < v->size(); ++i)
-		mPoints->insert(make_pair(i,v->at(i)));
+		mPoints->insert(make_pair(v->at(i)->getId(),v->at(i)));
 	
 	// choose random centers
 	int iSecret;
@@ -79,7 +79,7 @@ void kmeans_d::print()
 	map<int,par*>::iterator itPoints = mPoints->begin();
 	for (itPoints; itPoints != mPoints->end(); ++itPoints)
 	{
-		cout << "id: " << itPoints->first << " -> ";
+		// cout << "id: " << itPoints->first << " -> ";
 		itPoints->second->print();
 	}
 	

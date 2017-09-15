@@ -18,17 +18,14 @@ distance_reader::~distance_reader()
 int distance_reader::process()
 {
 	FILE *pFile;
-	int objCounter;
+	int objCounter = 0;
 	float featArray[mFeat];
 	par *point;
 
 	try{
 		pFile = fopen(mInputPath.c_str(), "r");
-
 		while(fscanf(pFile, "%f", &featArray[0]) != EOF)
 		{
-			objCounter = 0;
-
 			//read all features for some obj
 			for (int i = 1; i < mFeat; ++i)
 				fscanf(pFile, "%f", &featArray[i]);

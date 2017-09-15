@@ -11,6 +11,12 @@ par::~par()
 	delete mFeat;
 }
 
+int par::getId()
+{
+	return mId;
+}
+
+
 int par::size()
 {
 	return mFeat->size();
@@ -18,7 +24,7 @@ int par::size()
 
 void par::print()
 {
-	cout << "( ";
+	cout << "{id: " << mId << "}" << " ( ";
 	for (vector<double>::iterator i = mFeat->begin(); i != mFeat->end(); ++i)
 	{
 		cout << (*i) << " ";

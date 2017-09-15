@@ -27,6 +27,7 @@ public:
 		mFeat->at(pos) = value;
 	}
 
+	int getId();
 	int size();
 	void print();
 	

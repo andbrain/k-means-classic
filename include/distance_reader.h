@@ -3,19 +3,20 @@
 #include <iostream>
 #include <vector>
 #include <cstdio>
-#include "util.h"
+#include "par.h"
 
 using namespace std;
 
 class distance_reader
 {
 public:
-	distance_reader(string path);
+	distance_reader(string path, int features);
 	~distance_reader();
 	int process();
 	vector<par*>* getDistances();
 private:
 	string mInputPath;
+	int mFeat;
 	vector<par*>* mDist;
 };
 

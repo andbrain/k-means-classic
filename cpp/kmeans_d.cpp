@@ -14,6 +14,9 @@ kmeans_d::~kmeans_d()
 {
 	delete mPoints;
 
+	for (std::vector<par*>::iterator i = mCenters.begin(); i != mCenters.end(); ++i)
+		delete (*i);
+
 	map<int,vector<par*>*>::iterator itClusters = mClusters->begin();
 	for (itClusters; itClusters != mClusters->end(); ++itClusters)
 		delete itClusters->second;
@@ -30,38 +33,75 @@ void kmeans_d::initialize(vector<par*>* v)
 	
 	// choose random centers
 	int iSecret;
-	int nk = 1;
 	vector<par*> *vec;
-
+	map<int,int> chosen;
 	for (int i = 0; i < mK; ++i)
 	{
 		iSecret = rand() % mPoints->size();
 		//TODO:: maybe it can begin an infinite loop
-		while(mClusters->find(iSecret) != mClusters->end())
+		while(chosen.find(iSecret) != chosen.end())
 			iSecret = rand() % mPoints->size();
-		cout << "Secret: " << iSecret << endl;
+		chosen[iSecret] = 0;
+		par *p = mPoints->at(iSecret);
 		
-		par* p = mPoints->at(iSecret);
+		//initialize vector for each cluster
+		vec = new vector<par*>();
+		vec->push_back(p);
+		mClusters->insert(make_pair(mCenters.size(), vec));
 
 		//add data point to vector of centers
-		mCenters.push_back(p);
-		
-		//add data point to correct cluster
-		vec = new vector<par*>;
-		vec->push_back(p);
-		
-		mClusters->insert(make_pair(nk, vec));
-		nk++;
+		par *ponto = new par(-1);
+		for (int i = 0; i < p->size(); ++i)
+			ponto->add(p->get(i));
+		mCenters.push_back(ponto);
 	}
+}
+
+void assignToNearestCenter(map<int,par*> *points, vector<par*> *centers, map<int,vector<par*>*> *clusters)
+{
+	
 }
 
 int kmeans_d::process()
 {
+	print();
+	// TODO:: create maxit for max of iterations(if it's not converging)
+	assignToNearestCenter(mPoints, &mCenters, mClusters);
+	// reviewClusters(mCenters, mClusters);
+
+	return 0;
+}
+
+void kmeans_d::print()
+{
+	//show data points available
+	cout << "[Data Points]" << endl << endl;
+	map<int,par*>::iterator itPoints = mPoints->begin();
+	for (itPoints; itPoints != mPoints->end(); ++itPoints)
+	{
+		cout << "id: " << itPoints->first << " -> ";
+		itPoints->second->print();
+	}
+	
+	cout << endl;
+	cout << "[Centers]" << endl;
+
+	//show centers
+	for (std::vector<par*>::iterator i = mCenters.begin(); i != mCenters.end(); ++i)
+		(*i)->print();
+
+	cout << endl;
+	cout << "[Clusters]" << endl;
+
+	//show clusters
 	map<int,vector<par*>*>::iterator itClusters = mClusters->begin();
 	for (itClusters; itClusters != mClusters->end(); ++itClusters)
 	{
-		cout << itClusters->first << " => " << itClusters->second->at(0)->x << "," << itClusters->second->at(0)->y << endl;
+		cout << itClusters->first << ": " << endl;
+		for (int i = 0; i < itClusters->second->size(); ++i)
+		{
+			cout << setfill(' ') << setw(5);
+			itClusters->second->at(i)->print();
+		}
 	}
-
-	return 0;
 }

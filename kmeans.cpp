@@ -7,7 +7,7 @@
 
 using namespace std;
 
-int k, type;
+int k, type, features;
 string *inputPath, *outputPath;
 void checkInputParameters(int argc, char const *argv[]);
 
@@ -18,7 +18,7 @@ int main(int argc, char const *argv[])
 	if(!type)
 	{
 		//kmeans based on euclidean distance
-		distance_reader *dr = new distance_reader(*inputPath);
+		distance_reader *dr = new distance_reader(*inputPath, features);
 		if(!dr->process()){
 			delete dr;
 			delete inputPath;
@@ -29,7 +29,7 @@ int main(int argc, char const *argv[])
 		//classic kmeans
 		kmeans_d *kd = new kmeans_d(k,dr->getDistances());
 		kd->process();
-		
+
 		delete kd;
 		delete dr;
 	}
@@ -49,13 +49,14 @@ int main(int argc, char const *argv[])
 
 void checkInputParameters(int argc, char const *argv[])
 {
-	if(argc == 5)
+	if(argc == 6)
 	{
 		try{
 			k = stoi(argv[1]);
 			inputPath = new string(argv[2]);
 			outputPath = new string(argv[3]);
 			type = stoi(argv[4]);
+			features = stoi(argv[5]);
 		}
 		catch(exception& e){
 			cout << "[ERROR] Exception: " << e.what() << endl;
@@ -65,11 +66,12 @@ void checkInputParameters(int argc, char const *argv[])
 	else
 	{
 		cout << "[ERROR]: Missing parameters" << endl;
-		cout << "e.g: ./kmeans.out <K> <INPUT> <OUTPUT> <TYPE>" << endl;
+		cout << "e.g: ./kmeans.out <K> <INPUT> <OUTPUT> <TYPE> <FEATURES>" << endl;
 		cout << "K => number of clusters" << endl;
 		cout << "INPUT => dataset file" << endl;
 		cout << "OUTPUT => output file of clusters" << endl;
 		cout << "TYPE => {0 = distance | 1 = similarity}" << endl;
+		cout << "FEATURES => number of features" << endl;
 		exit(1);
 	}
 }

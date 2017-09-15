@@ -1,9 +1,10 @@
 #include "distance_reader.h"
 
-distance_reader::distance_reader(string path)
+distance_reader::distance_reader(string path, int features)
 {
 	// cout << "Starting distance_reader" << endl;
 	mInputPath = path;
+	mFeat = features;
 	mDist = new vector<par*>();
 }
 
@@ -17,17 +18,28 @@ distance_reader::~distance_reader()
 int distance_reader::process()
 {
 	FILE *pFile;
+	int objCounter;
+	float featArray[mFeat];
+	par *point;
 
 	try{
 		pFile = fopen(mInputPath.c_str(), "r");
-		float n1,n2;
 
-		while(fscanf(pFile, "%f %f", &n1, &n2) != EOF)
+		while(fscanf(pFile, "%f", &featArray[0]) != EOF)
 		{
-			par *ponto = new par();
-			ponto->x = n1;
-			ponto->y = n2;
-			mDist->push_back(ponto);
+			objCounter = 0;
+
+			//read all features for some obj
+			for (int i = 1; i < mFeat; ++i)
+				fscanf(pFile, "%f", &featArray[i]);
+			
+			//create pair of features and push to vector of distances
+			point = new par(objCounter);
+			for (int i = 0; i < mFeat; ++i)
+				point->add(featArray[i]);
+			
+			mDist->push_back(point);
+			objCounter++;
 		}
 		fclose(pFile);
 	}

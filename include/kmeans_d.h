@@ -1,11 +1,12 @@
 #ifndef KMEANS_D_H
 #define KMEANS_D_H
 #include <iostream>
+#include <iomanip>
 #include <vector>
 #include <map>
 #include <stdlib.h>     /* srand, rand */
 #include <time.h>       /* time */
-#include "util.h"
+#include "par.h"
 
 using namespace std;
 
@@ -21,6 +22,7 @@ private:
 	vector<par*> mCenters;
 	map<int,vector<par*>*> *mClusters;
 	void initialize(vector<par*>* v);
+	void print();
 };
 
 #endif

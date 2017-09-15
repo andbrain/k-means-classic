@@ -7,6 +7,7 @@
 #include <stdlib.h>     /* srand, rand */
 #include <time.h>       /* time */
 #include "par.h"
+#include "util.h"
 
 using namespace std;
 

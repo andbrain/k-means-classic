@@ -31,3 +31,12 @@ void par::print()
 	}
 	cout << ")" << endl;
 }
+
+double par::operator-(par &point)
+{
+	double result = 0;
+
+	for (int i = 0; i < mFeat->size(); ++i)
+		result += pow(this->get(i) - point.get(i), 2);
+	return sqrt(result);
+}

@@ -46,7 +46,7 @@ void kmeans_d::initialize(vector<par*>* v)
 		
 		//initialize vector for each cluster
 		vec = new vector<par*>();
-		vec->push_back(p);
+		// vec->push_back(p);
 		mClusters->insert(make_pair(mCenters.size(), vec));
 
 		//add data point to vector of centers
@@ -57,17 +57,18 @@ void kmeans_d::initialize(vector<par*>* v)
 	}
 }
 
-void assignToNearestCenter(map<int,par*> *points, vector<par*> *centers, map<int,vector<par*>*> *clusters)
-{
-	
-}
-
 int kmeans_d::process()
 {
+
+	cout << "**Before assign to Centers**" << endl;
 	print();
 	// TODO:: create maxit for max of iterations(if it's not converging)
 	assignToNearestCenter(mPoints, &mCenters, mClusters);
-	// reviewClusters(mCenters, mClusters);
+
+	cout << "**After assign to Centers**" << endl;
+	print();
+	
+	reviewClusters(&mCenters, mClusters);
 
 	return 0;
 }
@@ -75,7 +76,7 @@ int kmeans_d::process()
 void kmeans_d::print()
 {
 	//show data points available
-	cout << "[Data Points]" << endl << endl;
+	cout << "[Data Points]" << endl;
 	map<int,par*>::iterator itPoints = mPoints->begin();
 	for (itPoints; itPoints != mPoints->end(); ++itPoints)
 	{

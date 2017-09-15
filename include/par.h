@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <vector>
+#include <cmath>
 
 using namespace std;
 
@@ -30,6 +31,8 @@ public:
 	int getId();
 	int size();
 	void print();
+
+	double operator-(par &point);
 	
 private:
 	int mId;

@@ -22,9 +22,11 @@ int par::size()
 	return mFeat->size();
 }
 
-void par::print()
+void par::print(bool showId)
 {
-	cout << "{id: " << mId << "}" << " ( ";
+	if(showId)
+		cout << "{id: " << mId << "} ";
+	cout << "( ";
 	for (vector<double>::iterator i = mFeat->begin(); i != mFeat->end(); ++i)
 	{
 		cout << (*i) << " ";

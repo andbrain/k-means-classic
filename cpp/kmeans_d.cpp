@@ -89,7 +89,7 @@ void kmeans_d::print()
 
 	//show centers
 	for (std::vector<par*>::iterator i = mCenters.begin(); i != mCenters.end(); ++i)
-		(*i)->print();
+		(*i)->print(false);
 
 	cout << endl;
 	cout << "[Clusters]" << endl;

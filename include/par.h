@@ -30,7 +30,7 @@ public:
 
 	int getId();
 	int size();
-	void print();
+	void print(bool showId=true);
 
 	double operator-(par &point);
 	

@@ -10,13 +10,14 @@ using namespace std;
 class distance_reader
 {
 public:
-	distance_reader(string path, int features);
+	distance_reader(string path, int features, bool labeled=false);
 	~distance_reader();
 	int process();
 	vector<par*>* getDistances();
 private:
 	string mInputPath;
 	int mFeat;
+	bool mLabeled;
 	vector<par*>* mDist;
 };
 

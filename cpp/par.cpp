@@ -22,6 +22,15 @@ int par::getId()
 	return mId;
 }
 
+string par::getLabel()
+{
+	return mLabel;	
+}
+
+void par::setLabel(string label)
+{
+	mLabel = label;	
+}
 
 int par::size()
 {
@@ -37,7 +46,7 @@ void par::print(bool showId)
 	{
 		cout << (*i) << " ";
 	}
-	cout << ")" << endl;
+	cout << ") " << mLabel << endl; 
 }
 
 double par::operator-(par &point)

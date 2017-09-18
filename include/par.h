@@ -30,14 +30,16 @@ public:
 	}
 
 	int getId();
+	string getLabel();
+	void setLabel(string label);
 	int size();
 	void print(bool showId=true);
-
 	double operator-(par &point);
 	
 private:
 	int mId;
-	vector<double> *mFeat;	
+	string mLabel;
+	vector<double> *mFeat;
 };
 
 #endif

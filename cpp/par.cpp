@@ -6,6 +6,12 @@ par::par(int id)
 	mFeat = new vector<double>();
 }
 
+par::par(int size, double value, int id)
+{
+	mId = id;
+	mFeat = new std::vector<double>(size,value);
+}
+
 par::~par()
 {
 	delete mFeat;

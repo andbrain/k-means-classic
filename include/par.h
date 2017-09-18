@@ -10,7 +10,8 @@ using namespace std;
 class par
 {
 public:
-	par(int id);
+	par(int id=-1);
+	par(int size, double value, int id=-1);
 	~par();
 
 	inline void add(double value)

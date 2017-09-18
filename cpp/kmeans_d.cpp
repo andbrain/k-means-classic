@@ -50,7 +50,7 @@ void kmeans_d::initialize(vector<par*>* v)
 		mClusters->insert(make_pair(mCenters.size(), vec));
 
 		//add data point to vector of centers
-		par *ponto = new par(-1);
+		par *ponto = new par();
 		for (int i = 0; i < p->size(); ++i)
 			ponto->add(p->get(i));
 		mCenters.push_back(ponto);
@@ -59,7 +59,7 @@ void kmeans_d::initialize(vector<par*>* v)
 
 int kmeans_d::process()
 {
-
+	int maxit = 5;
 	cout << "**Before assign to Centers**" << endl;
 	print();
 	// TODO:: create maxit for max of iterations(if it's not converging)
@@ -67,9 +67,21 @@ int kmeans_d::process()
 
 	cout << "**After assign to Centers**" << endl;
 	print();
+	bool converge;
+	for (int i = 0; i < maxit; ++i)
+	{
+		cout << "Iteration " << i << endl;
+		converge = clustersConverge(&mCenters, mClusters);
+		cout << "Converge? " << converge << endl;
+		if(converge)
+			break;
+		for (int clusterIndex = 0; clusterIndex < mClusters->size(); ++clusterIndex)
+			refactCenter(clusterIndex,&mCenters, mClusters);
+	}
 	
-	reviewClusters(&mCenters, mClusters);
-
+	cout << "**After Review clusters**" << endl;
+	print();
+	
 	return 0;
 }
 

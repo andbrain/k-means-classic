@@ -1,10 +1,11 @@
 #include "kmeans_d.h"
 
-kmeans_d::kmeans_d(int k, vector<par*>* v)
+kmeans_d::kmeans_d(int k, int maxit,vector<par*>* v)
 {
 	cout << "Starting kmeans_d" << endl;
 	srand(time(NULL));
 	mK = k;
+	mMaxIt = maxit;
 	mPoints = new map<int,par*>();
 	mClusters = new map<int,vector<par*>*>();
 	initialize(v);
@@ -59,27 +60,28 @@ void kmeans_d::initialize(vector<par*>* v)
 
 int kmeans_d::process()
 {
-	int maxit = 5;
-	cout << "**Before assign to Centers**" << endl;
-	print();
-	// TODO:: create maxit for max of iterations(if it's not converging)
+	// cout << "**Before assign to Centers**" << endl;
+	// print();
+
 	assignToNearestCenter(mPoints, &mCenters, mClusters);
 
-	cout << "**After assign to Centers**" << endl;
-	print();
+	// cout << "**Assign to Centers**" << endl;
+	// print();
 	bool converge;
-	for (int i = 0; i < maxit; ++i)
+	for (int i = 0; i < mMaxIt; ++i)
 	{
 		cout << "Iteration " << i << endl;
 		converge = clustersConverge(&mCenters, mClusters);
-		cout << "Converge? " << converge << endl;
+		
 		if(converge)
 			break;
 		for (int clusterIndex = 0; clusterIndex < mClusters->size(); ++clusterIndex)
 			refactCenter(clusterIndex,&mCenters, mClusters);
 	}
-	
-	cout << "**After Review clusters**" << endl;
+
+	cout << endl;
+	cout << endl;
+	cout << "**Final clusters**" << endl;
 	print();
 	
 	return 0;

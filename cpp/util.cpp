@@ -70,7 +70,6 @@ bool clustersConverge(vector<par*> *centers, map<int,vector<par*>*> *clusters)
 	map<int,vector<par*>*>::iterator itClusters = clusters->begin();
 	for (itClusters; itClusters != clusters->end(); ++itClusters)
 	{
-		cout << itClusters->first << ": " << endl;
 		for (int i = 0; i < itClusters->second->size(); ++i)
 		{
 			dataPoint = itClusters->second->at(i);
@@ -80,7 +79,6 @@ bool clustersConverge(vector<par*> *centers, map<int,vector<par*>*> *clusters)
 			if(nearestCluster != itClusters->first)
 			{
 				result = false;
-				//TODO:: realocate data point
 				//erase from current cluster
 				itClusters->second->erase(itClusters->second->begin() + i);
 				//add into the nearest cluster

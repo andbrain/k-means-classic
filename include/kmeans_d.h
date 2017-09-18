@@ -14,11 +14,11 @@ using namespace std;
 class kmeans_d
 {
 public:
-	kmeans_d(int k, vector<par*>* v);
+	kmeans_d(int k, int maxit, vector<par*>* v);
 	~kmeans_d();
 	int process();
 private:
-	int mK;
+	int mK, mMaxIt;
 	map<int,par*> *mPoints;
 	vector<par*> mCenters;
 	map<int,vector<par*>*> *mClusters;

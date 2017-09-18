@@ -7,7 +7,7 @@
 
 using namespace std;
 
-int k, type, features;
+int k, type, features, maxit;
 string *inputPath, *outputPath;
 void checkInputParameters(int argc, char const *argv[]);
 
@@ -27,9 +27,10 @@ int main(int argc, char const *argv[])
 		}
 
 		//classic kmeans
-		kmeans_d *kd = new kmeans_d(k,dr->getDistances());
+		kmeans_d *kd = new kmeans_d(k, maxit, dr->getDistances());
 		kd->process();
-
+		
+		//TODO:: output clusters
 		delete kd;
 		delete dr;
 	}
@@ -49,7 +50,7 @@ int main(int argc, char const *argv[])
 
 void checkInputParameters(int argc, char const *argv[])
 {
-	if(argc == 6)
+	if(argc == 7)
 	{
 		try{
 			k = stoi(argv[1]);
@@ -57,6 +58,7 @@ void checkInputParameters(int argc, char const *argv[])
 			outputPath = new string(argv[3]);
 			type = stoi(argv[4]);
 			features = stoi(argv[5]);
+			maxit = stoi(argv[6]);
 		}
 		catch(exception& e){
 			cout << "[ERROR] Exception: " << e.what() << endl;
@@ -72,6 +74,7 @@ void checkInputParameters(int argc, char const *argv[])
 		cout << "OUTPUT => output file of clusters" << endl;
 		cout << "TYPE => {0 = distance | 1 = similarity}" << endl;
 		cout << "FEATURES => number of features" << endl;
+		cout << "MAXIT => max of iterations" << endl;
 		exit(1);
 	}
 }
